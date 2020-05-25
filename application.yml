@@ -1,28 +1,18 @@
-server:
-  port: 9527
-  
-zuul: #网关配置
-  prefix: /com #前缀配置
-  ignored-services: provider-dept #忽略服务名 全部忽略可配置  ignored-services: "*"
-  routes: #服务名对应规则
-    mydept.serviceId: provider-dept
-    mydept.path: /provider/**
-
 spring:
-   application:
-    name: zuul-gateway
-      
-eureka:
-  client: #客户端注册进eureka服务列表内
-    service-url: 
-      #defaultZone: http://localhost:7001/eureka 
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
-  instance: 
-    instance-id: zuul-gateway-9527
-    prefer-ip-address: true
+  profiles:
+    active:
+    - dev
+---
+spring:
+  profiles: dev     #开发环境
+  application: 
+    name: microservicecloud-config-atguigu-dev
+---
+spring:
+  profiles: test   #测试环境
+  application: 
+    name: microservicecloud-config-atguigu-test
+#  请保存为UTF-8格式
+ 
+ 
 
-info:
-  app.name: zuul-springCloud
-  company.name: com.springCloud
-  build.artifactId: $project.artifactId$
-  build.version: $project.version$
